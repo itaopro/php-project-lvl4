@@ -17,6 +17,20 @@ Route::resource('task_statuses', TaskStatusController::class)->middleware('auth'
 Route::middleware('auth')->group(function () {
     Route::resource('tasks', TaskController::class);
 });
+Route::get('/tasks', [TaskController::class, 'index'])->name('tasks.index');
+Route::get('/tasks/create', [TaskController::class, 'create'])->name('tasks.create');
+Route::post('/tasks', [TaskController::class, 'store'])->name('tasks.store');
+Route::get('/tasks/{id}', [TaskController::class, 'show'])->name('tasks.show');
+Route::get('/tasks/{id}/edit', [TaskController::class, 'edit'])->name('tasks.edit');
+Route::put('/tasks/{id}', [TaskController::class, 'update'])->name('tasks.update');
+Route::delete('/tasks/{id}', [TaskController::class, 'destroy'])->name('tasks.destroy');
+Route::get('/labels/create', [LabelController::class, 'create'])->name('labels.create');
+Route::post('/labels', [LabelController::class, 'store'])->name('labels.store');
+Route::get('/labels/{label}/edit', [LabelController::class, 'edit'])->name('labels.edit');
+Route::put('/labels/{label}', [LabelController::class, 'update'])->name('labels.update');
+Route::delete('/labels/{label}', [LabelController::class, 'destroy'])->name('labels.destroy');
+Route::post('/tasks/{task}/labels', [TaskController::class, 'attachLabel'])->name('tasks.attachLabel');
+Route::delete('/tasks/{task}/labels/{label}', [TaskController::class, 'detachLabel'])->name('tasks.detachLabel');
 //Route::get('/', function () {
 //    return view('welcome');
 //});

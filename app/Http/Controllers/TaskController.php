@@ -100,4 +100,15 @@ class TaskController extends Controller
 
         return redirect()->route('tasks.index');
     }
+    public function attachLabel(Request $request, Task $task)
+    {
+        $task->labels()->attach($request->label_id);
+        return redirect()->back();
+    }
+
+    public function detachLabel(Task $task, Label $label)
+    {
+        $task->labels()->detach($label->id);
+        return redirect()->back();
+    }
 }
